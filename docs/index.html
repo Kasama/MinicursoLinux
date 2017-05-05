@@ -116,10 +116,10 @@ background-position: center;
 background-repeat: no-repeat;
 background-size: contain;
 
-Estutura de diretórios
+Estrutura de diretórios
 ======================
 
-Sistemas Linux seguem uma estutura de diretórios básica padrão. Com algumas diferenças dependendo da distribuição.
+Sistemas Linux seguem uma estrutura de diretórios básica padrão. Com algumas diferenças dependendo da distribuição.
 
 Hierarquia de diretórios
 
@@ -146,7 +146,7 @@ background-repeat: no-repeat;
 background-size: contain;
 <!-- ![bg](background.png) -->
 
-Estutura de diretórios
+Estrutura de diretórios
 ======================
 
 - `/boot`
@@ -176,7 +176,7 @@ background-position: center;
 background-repeat: no-repeat;
 background-size: contain;
 
-Estutura de diretórios
+Estrutura de diretórios
 ======================
 
 - `/proc`
@@ -206,7 +206,7 @@ background-position: center;
 background-repeat: no-repeat;
 background-size: contain;
 
-Estutura de diretórios
+Estrutura de diretórios
 ======================
 
 - `/opt`
@@ -226,6 +226,10 @@ Bibliotecas do sistema
 
 Representação de devices (mouse, teclado, hd)
 
+> `/dev/null`
+
+> `/dev/urandom`
+
 ---
 background-image: url(background.png)
 background-position: center;
@@ -233,19 +237,22 @@ background-repeat: no-repeat;
 background-size: contain;
 <!-- ![bg](background.png) -->
 
-Estutura de diretórios
+Estrutura de diretórios
 ======================
 
 - `/var`
 
 Arquivos variáveis (logs, cache, spool)
 
-- `/media` ou `/run`
+- `/media`
 
 Ponto de montagem de dispositivos externos
 
 - `/mnt`
+
 Ponto de montagem de uso livre
+
+Pode ser usado para debug
 
 ---
 background-image: url(background.png)
@@ -261,8 +268,65 @@ O shell bash (Bourne Again SHell) é a implementação mais popular de um shell 
 
 Trabalho do shell
 -----------------
-- Prover uma
+- Prover uma interface entre o usuário e o sistema operacional.
 
+- Interpretar comandos ou combinações de comandos
+
+- Gerenciar um ambiente para execução de programas
+
+Comandos Bash
+-------------
+
+- cd
+
+Muda o diretório atual. (Change Directory).
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Comandos Bash
+-------------
+
+- . (aka source)
+
+Executa os comandos contidos num arquivo nesse shell.
+
+- export
+
+Marca variável para ser passada com o ambiente para processos filhos.
+
+Variaveis
+---------
+
+```sh
+VARIAVEL="batata" # Note que não é possível colocar um espaços
+echo "$VARIAVEL"
+# source e . tem o mesmo significado
+. ~/MinicursoLinux/bash/sourceme
+echo "$VARIAVEL"
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Variaveis
+---------
+
+```sh
+cd ~/MinicursoLinux/bash
+VARIAVEL="batata"
+./ambiente.sh
+VARIAVEL="potato" ./ambiente.sh
+echo "$VARIAVEL"
+export VARIAVEL
+./ambiente.sh
+```
 
 			</textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
