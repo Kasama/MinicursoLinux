@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minicurso Linux</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; color: white; }
+      h1, h2, h3 {
+					font-family: 'Lato', 'Avenir Next', 'Avenir', 'Trebuchet MS', 'Segoe UI', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+        font-weight: normal;
+						color: white;
+      }
+			.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; background-color: rgba(1, 1, 1, .3); border-radius: 2px; border-width: 4px; }
+
+    </style>
+  </head>
+  <body>
+			<textarea id="source">
+class: center, middle
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+
+<!-- $theme: gaia -->
+
+Minicurso Linux
+===============
+
+Roberto P. Alegro
+
+Semcomp ß
+
+ICMC - USP
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+
+Linux
+=====
+
+O que é Linux?
+--------------
+
+Linux é um Kernel Monolítico baseado em UNIX Open Source e Free.
+
+Criado por Linux Trovalds em 1991.
+
+Windows?
+--------
+
+Windows é um Sistema Operacional com um kernel próprietário.
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+
+Linux
+=====
+
+Qual o papel de um Kernel?
+--------------------------
+
+Um Kernel é o software que faz a interface entre o Sistema Operacional (e programas) e o hardware.
+
+O que é GNU?
+------------
+
+GNU é um conjunto de utilidades. Geralmente é pareado com o kernel Linux dando origem ao SO GNU/Linux, muitas vezes chamado só de Linux
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+<!-- ![bg](background.png) -->
+
+Linux
+=====
+
+O que são distribuições Linux e diferenças?
+-------------------------------------------
+
+Um Sistema Operacional GNU/Linux com adição de packages, configurações e geralmente de um package manager.
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+<!-- ![bg](background.png) -->
+
+Linux
+=====
+
+Outros Linux NON-GNU
+--------------------
+
+- Android
+- Smart TV
+- Embedded
+- etc
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+
+Estutura de diretórios
+======================
+
+Sistemas Linux seguem uma estutura de diretórios básica padrão. Com algumas diferenças dependendo da distribuição.
+
+Hierarquia de diretórios
+
+- `/`
+
+Root - A raiz do sistema
+
+- `/home/usuário`
+
+Home - pasta pessoal do usuário (`~`)
+
+Guarda documentos, fotos, configurações pessoais, etc
+
+- `/root`
+
+Home do usuário `root`
+
+Guarda normalmente configurações específicas para o usuário `root`
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+<!-- ![bg](background.png) -->
+
+Estutura de diretórios
+======================
+
+- `/boot`
+
+Imagem do Kernel e bootloader
+
+
+- `/bin` e `/sbin`
+
+Executáveis binários.
+
+`cat`, `ls`, `grep`, `firefox`, etc
+
+- `/usr`
+
+Arquivos relacionados a todos os usuários
+
+> `/usr/bin` `/usr/share`
+
+- `/tmp`
+
+Arquivos temporários (Apagados a cada reboot)
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+
+Estutura de diretórios
+======================
+
+- `/proc`
+
+Arquivos que representam processos e sockets
+
+```sh
+# retorna o PID do firefox
+pgrep firefox
+# abre a pasta correspondente ao processo do firefox
+cd /proc/pid
+```
+
+- `/etc` e `/usr/etc`
+
+Arquivos de configuração do sistema.
+
+> `/etc/passwd` - informações de usuários
+
+> `/etc/shadow` - informações de senhas
+
+> `/etc/fstab` - informações do sistema de arquivos
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+
+Estutura de diretórios
+======================
+
+- `/opt`
+
+Arquivos de programas opcionais
+
+- `/srv`
+
+Raramente presente.
+Usada para manter um servidor Apache
+
+- `/lib` e `/usr/lib`
+
+Bibliotecas do sistema
+
+- `/dev/`
+
+Representação de devices (mouse, teclado, hd)
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+<!-- ![bg](background.png) -->
+
+Estutura de diretórios
+======================
+
+- `/var`
+
+Arquivos variáveis (logs, cache, spool)
+
+- `/media` ou `/run`
+
+Ponto de montagem de dispositivos externos
+
+- `/mnt`
+Ponto de montagem de uso livre
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+<!-- ![bg](background.png) -->
+
+Bash
+====
+
+O shell bash (Bourne Again SHell) é a implementação mais popular de um shell POSIX. Apesar de existirem outros (ksh, zsh, csh, fish, etc).
+
+Trabalho do shell
+-----------------
+- Prover uma
+
+
+			</textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
