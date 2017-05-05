@@ -298,6 +298,8 @@ Executa os comandos contidos num arquivo nesse shell.
 
 Marca variável para ser passada com o ambiente para processos filhos.
 
+--
+
 Variaveis
 ---------
 
@@ -327,6 +329,59 @@ echo "$VARIAVEL"
 export VARIAVEL
 ./ambiente.sh
 ```
+
+Visualizar variáveis de ambiente com `env`
+
+#### Prompt do Bash
+
+```sh
+echo "'$PS1'"
+# `\033[01;35m` é o caracter especial da cor vermelha
+# usar `\w` ao invés de `\W` mostra o caminho completo do diretório atual
+PS1="\[\033[01;35m\][\u@\h\[\033[01;37m\] \w\[\033[01;35m\]]\$\[\033[00m\] "
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Sinais
+------
+
+- `Ctrl+C`
+
+Envia um sinal SIGINT (interrupt -2) para a aplicação rodando em foreground.
+
+O comportamento padrão da aplicação é de cancelar ou interromper a operação atual ao receber esse sinal (muitas vezes isso significa finalizar o programa), mas ele pode ser ignorado ou significar qualquer outro comportamento, dependendo da aplicação.
+
+Outros sinais existem, os mais úteis são SIGTERM (terminate -15) e SIGKILL (kill -9). O programa `kill` pode enviar sinais para outras aplicações que estão rodando.
+
+```sh
+pgrep firefox
+kill -15 PID
+```
+
+```sh
+./persistent.sh # rodar em outro terminal
+# Tente apertar Ctrl+C
+pgrep persistent.sh
+kill -2 PID # SIGINT o mesmo que Ctrl+C
+kill -15 PID # SIGTERM pede para fechar 'gracefully'
+kill -9 PID # SIGKILL mata o processo
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+
+- `Ctrl+D`
+
+Envia EOF
 
 			</textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
