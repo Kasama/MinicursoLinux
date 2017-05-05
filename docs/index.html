@@ -56,7 +56,7 @@ Criado por Linux Trovalds em 1991.
 Windows?
 --------
 
-Windows é um Sistema Operacional com um kernel próprietário.
+Windows é um Sistema Operacional com um kernel proprietário.
 
 ---
 background-image: url(background.png)
@@ -300,7 +300,7 @@ Marca variável para ser passada com o ambiente para processos filhos.
 
 --
 
-Variaveis
+Variáveis
 ---------
 
 ```sh
@@ -317,7 +317,7 @@ background-position: center;
 background-repeat: no-repeat;
 backgorund-size: contain;
 
-Variaveis
+Variáveis
 ---------
 
 ```sh
@@ -356,7 +356,7 @@ Envia um sinal SIGINT (interrupt -2) para a aplicação rodando em foreground.
 
 O comportamento padrão da aplicação é de cancelar ou interromper a operação atual ao receber esse sinal (muitas vezes isso significa finalizar o programa), mas ele pode ser ignorado ou significar qualquer outro comportamento, dependendo da aplicação.
 
-Outros sinais existem, os mais úteis são SIGTERM (terminate -15) e SIGKILL (kill -9). O programa `kill` pode enviar sinais para outras aplicações que estão rodando.
+Outros sinais existem, os mais úteis são SIGTERM (terminate -15) e SIGKILL (kill -9). O programa `kill` pode enviar sinais para outras aplicações rodando.
 
 ```sh
 pgrep firefox
@@ -378,10 +378,167 @@ background-position: center;
 background-repeat: no-repeat;
 backgorund-size: contain;
 
+Outros Atalhos
+--------------
 
 - `Ctrl+D`
 
-Envia EOF
+Envia EOF (End Of File ou Fim De Arquivo) para o programa. Caso o programa espere um input, isso pode significar input vazio ou fim de input.
+
+```sh
+cat
+# Digite algumas coisas e aperte Ctrl+D
+```
+
+- `Ctrl+R`
+
+Inicia a busca reversa no histórico de comandos
+
+- `Ctrl+L`
+
+Limpa a tela (da mesma forma que o comando `clear`)
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Múltiplos processos
+-------------------
+
+- `Ctrl+Z`
+
+Pausa o processo que está no foreground
+
+```sh
+./loud.sh
+# Pressione Ctrl+Z
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Job Control
+-----------
+
+O comando `jobs` lista os processos rodando no shell atual, no foreground, background e os pausados.
+
+Para enviar um processo para o background, primeiro deve-se pausá-lo (Ctrl+Z), depois executar `bg`.
+
+Para devolver um processo para o foreground, basta executar `fg`
+
+```sh
+jobs # lista os processos
+# [1]+  Parado                  ./loud.sh
+bg # envia para o background
+fg # trás de volta para o foreground
+```
+
+O operador & pode ser adicionado no final do comando para executá-lo no background
+
+```sh
+./loud.sh &
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Redirecionamento
+----------------
+
+O bash também permite redirecionar o output e o input dos comandos executados.
+
+Existem uma entrada e duas saídas padrão para cada programa, são chamados `stdin` (input) `stdout` (output) e `stderr` (erro).
+
+Eles são enumerados 0 - input, 1 - output e 2 - erro.
+
+--
+
+Redirecionar `stdout` para um arquivo com `>` ou `1>`
+
+```sh
+echo "Eu não vou aparecer na tela" > echoed.txt
+cat echoed.txt
+```
+
+Redirecionar `stdout` para o fim de um arquivo `>>` ou `1>>`
+
+```sh
+echo "Eu vou para o final do arquivo" >> echoed.txt
+cat echoed.txt
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Redirecionamento
+----------------
+
+Para redirecionar `stderr` basta adicionar o número dele nos `>`, por exemplo `2>`
+```sh
+./error.py > echoed.txt
+cat echoed.txt
+./error.py 2> echoed.txt
+```
+
+Para redirecionar o `stdin` é usado `<` ao invés de `>`
+```sh
+cat < echoed.txt
+```
+
+Também é possível encaminhar a saída de um programa para a entrada do próximo. Isso é chamado de piping `|`
+```sh
+echo "pipes are fun" | sed 's/fun/awesome/'
+# Vamos ver sed mais para frente no curso
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Programas úteis
+===============
+
+A maioria das distribuições de Linux já vem com uma série de programas úteis que seguem a filosofia UNIX.
+
+"
+
+This is the Unix philosophy:
+
+> Write programs that do one thing and do it well.
+
+> Write programs to work together.
+
+> Write programs to handle text streams, because that is a universal interface.
+
+"
+
+>> -Doug McIlroy
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+
+
+
+
+
+
 
 			</textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">

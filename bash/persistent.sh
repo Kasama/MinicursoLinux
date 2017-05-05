@@ -1,6 +1,6 @@
 #! /bin/bash
 
-trap "echo 'HAHA! Tentou me matar com SIGINT!'" SIGINT
+trap "echo '\nHAHA! Tentou me matar com SIGINT!'" SIGINT
 trap "echo 'HAHA! Tentou me matar com SIGTERM !'" SIGTERM
 trap "echo 'HAHA! Tentou me matar com SIGHUP!'" SIGHUP
 
