@@ -22,7 +22,6 @@ O Livro D’ele - Florbela Espanca
 O Guardador de Rebanhos - Fernando Pessoa
 Poemas de Fernando Pessoa - Fernando Pessoa
 Poemas de Álvaro de Campos - Fernando Pessoa
-Poemas de Ricardo Reis - Fernando Pessoa
 Primeiro Fausto - Fernando Pessoa
 O Eu Profundo e os Outros Eus - Fernando Pessoa
 O Pastor Amoroso - Fernando Pessoa
@@ -89,3 +88,4 @@ As Primaveras - Casimiro de Abreu
 Carolina - Casimiro de Abreu
 A Desobediência Civil - Henry David Thoreau
 A Princesa de Babilônia - Voltaire
+Poemas de Ricardo Reis - Fernando Pessoa

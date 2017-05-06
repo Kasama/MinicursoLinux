@@ -242,7 +242,7 @@ Estrutura de diretórios
 
 - `/var`
 
-Arquivos variáveis (logs, cache, spool)
+Arquivos variáveis, que tendem a crescer (logs, cache, spool)
 
 - `/media`
 
@@ -252,7 +252,12 @@ Ponto de montagem de dispositivos externos
 
 Ponto de montagem de uso livre
 
-Pode ser usado para debug
+--
+
+Permissões
+----------
+
+Todos os arquivos do sistema são protegidos por um esquema de permissões que separa o dono do arquivo de usuários pertencentes ao grupo dono de outros. Entraremos em mais detalhes sobre esse sistema de permissões no futuro.
 
 ---
 background-image: url(background.png)
@@ -274,13 +279,6 @@ Trabalho do shell
 
 - Gerenciar um ambiente para execução de programas
 
-Comandos Bash
--------------
-
-- cd
-
-Muda o diretório atual. (Change Directory).
-
 ---
 background-image: url(background.png)
 background-position: center;
@@ -289,6 +287,10 @@ backgorund-size: contain;
 
 Comandos Bash
 -------------
+
+- cd
+
+Muda o diretório atual. (Change Directory).
 
 - . (aka source)
 
@@ -425,7 +427,7 @@ backgorund-size: contain;
 Job Control
 -----------
 
-O comando `jobs` lista os processos rodando no shell atual, no foreground, background e os pausados.
+O comando `jobs` lista os processos ativos no shell atual, no foreground, background e os pausados.
 
 Para enviar um processo para o background, primeiro deve-se pausá-lo (Ctrl+Z), depois executar `bg`.
 
@@ -508,6 +510,130 @@ background-position: center;
 background-repeat: no-repeat;
 backgorund-size: contain;
 
+Permissões
+==========
+Todo o arquivo tem um usuário dono e um grupo dono.
+
+O sistema de permissões é dividido em 3 partes principais.
+
+- permissões de dono
+
+Denominado por `u` (user permissions). Define quais permissões do dono do arquivo tem sobre ele.
+
+- permissões de grupo
+
+Denominado por `g` (group permissions). Define quais permissões os usuários pertencentes ao grupo dono do arquivo tem sobre ele.
+
+- permissões de outros
+
+Denominado por `o` (other permissions). Define quais permissões os outros usuários tem sobre o arquivo
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Permissões
+==========
+
+Alem disso existem 3 permissões básicas.
+
+- Leitura
+
+Denominada por `r` (read). Com valor octal 4.
+
+- Escrita
+
+Denominada por `w` (write). Com valor octal 2.
+
+- Execução
+
+Denominada por `x` (eXecute). Com valor octal 1.
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Permissões
+==========
+
+O usuário ROOT
+--------------
+
+O usuário `root` ou SuperUsuário, é o usuário com poderes máximos do sistema operacional. Ele pode fazer **tudo**.
+
+Para usar os poderes do `root` para executar um comando, é possível usar o programa `sudo` (Switch User and DO) ou `su` (Switch User). Sem nenhuma opção adicional, esses comandos tentam trocar o usuário para o `root`, mas é possível usá-los para executar comandos como outros usuários também.
+
+```
+cat /etc/shadow
+sudo cat /etc/shadow
+```
+
+"With great power, comes great responsibility" --Uncle Ben.
+
+Como `root` é possível executar os mais destrutivos comandos sem pedir duas vezes. O programa rodando como `root` tem poderes de fazer absolutamente qualquer coisa no sistema. O sistema não pedirá nenhuma confirmação além da senha do `root` para isso.
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Permissões
+==========
+
+As permissões são expressas por meio de um número octal de 3 dígitos.
+
+O primeiro dígito se refere ao usuário, o segundo ao grupo e o terceiro aos outros.
+
+O valor de cada dígito define as permissões que aquela categoria tem sobre o arquivo.
+
+Por exemplo, um arquivo com permissão 664 (-rw-rw-r--) pode ser lido por todos os usuários, mas apenas alterado pelo dono ou usuários no grupo-dono. Nenhum usuário pode executar esse arquivo.
+
+```
+-rw-rw-r--
+^ ^  ^  ^
+| |  |  |
+| |  |  L 3 bit dos outros (read = 4)
+| |  |
+| |  L 3 bits do grupo (read+write = 4+2 = 6)
+| |
+| L 3 bits do usuário (read+write = 4+2 = 6)
+|
+L bit de tipo de arquivo (- = arquivo, d = diretório, l = link)
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Permissões
+==========
+
+O dono do arquivo (ou `root`) pode alterar as permissões usando `chmod`.
+
+`chmod` pode ser usado com o valor numérico da permissão, como `chmod 664 arquivo.txt` ou como adição/remoção de permissões individuais. `chmod u+x arquivo.sh` `chmod o-r arquivo.txt`
+
+```sh
+touch arquivo.txt
+ls -l arquivo.txt
+chmod o-r arquivo.txt
+ls -l arquivo.txt
+chmod 755 arquivo.txt
+ls -l
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
 Programas úteis
 ===============
 
@@ -532,6 +658,272 @@ background-image: url(background.png)
 background-position: center;
 background-repeat: no-repeat;
 backgorund-size: contain;
+
+Programas úteis
+===============
+
+- `echo`
+
+`echo` é um programa que apenas repete o que foi dado como argumento no output.
+
+Ele é muito usado para redirecionar texto para outros programas com pipe `|`
+
+```sh
+echo "Um texto"
+```
+
+- `cat`
+
+`cat` é um programa que tem por objetivo concatenar arquivos
+
+```sh
+cat header.txt body.txt footer.txt > document.txt
+```
+
+`cat` também é muito usado simplesmente para ler o conteúdo de um arquivo e redirecionar para outro programa com pipe `|`
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Programas úteis
+===============
+
+- `less` ou `more`
+
+`less` e `more` são programas chamados pagers. Eles servem para gerenciar saída maior do que o tamanho da tela, providenciando scroll e busca
+
+- `tail` e `head`
+
+`less` e `more` são programas que filtram o output num número máximo de linhas (10 por padrão).
+
+```sh
+seq 1 90 | tail -15
+seq 1 90 | head -15
+```
+
+- `dmesg`
+
+Imprime o buffer de mensagens do kernel.
+
+```sh
+dmesg | tail -20
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Programas úteis
+===============
+
+- `mkdir`
+
+Cria um diretório (MaKe DIRectory).
+
+```sh
+mkdir novapasta
+cd novapasta
+```
+
+- `touch`
+
+Altera a data de modificação de um arquivo, por padrão para a data atual. Cria o arquivo se ele não existir.
+
+```sh
+touch arquivo.txt
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Programas úteis
+===============
+
+- `cp`
+
+CoPia um arquivo para um novo destino.
+
+```sh
+cp arquivo.txt arquivo-copia.txt
+```
+
+- `mv`
+
+MoVe um arquivo para um novo destino. Pode também renomear arquivos.
+
+```sh
+mv arquio.txt arquivo.txt
+```
+
+- `ln`
+
+Cria um LiNk para o arquivo destino. Links podem ser simbólicos ou físicos.
+
+```sh
+ln nomedosymlink arquivo.txt
+ln -s nomedohardlink arquivo.txt
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Programas úteis
+===============
+
+- `rmdir`
+
+ReMove um DIRetório vazio.
+
+```sh
+rmdir novapasta
+```
+
+- `rm`
+
+ReMove um arquivo (deleta) **permanentemente**. Não há _Lixeira_
+
+```sh
+rm arquivo.txt
+```
+
+Não há um jeito (fácil) de recuperar um arquivo **removido**
+
+Cuidado com as opções -r (recursivo) e -f (forçado). Use -i (interativo) sempre que possível.
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Programas úteis
+===============
+
+- `nano`
+
+`nano` é um simples editor de texto para o terminal.
+
+```sh
+nano arquivo.txt
+```
+
+Use `Ctrl+X` para sair do `nano`
+
+- `vim`
+
+`vim` é um editor de texto complexo e muito poderoso, mas que depende de uma grande curva de aprendizagem.
+
+```sh
+vim arquivo.txt
+```
+
+Use `ZZ` ou `:q!` para sair do `vim`
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Grep
+----
+
+`grep` é um programa que consegue filtrar linhas de texto baseado em expressões regulares
+
+Ele é usado em 2 principais cenários.
+
+O primeiro é filtrar output de um comando.
+
+```sh
+ls -la | grep 'arquivo'
+```
+
+Outro uso importante é encontrar texto dentro de arquivos.
+
+Exemplo: listar arquivos com a palavra 'rush' e sua posição
+
+```sh
+grep -n 'rush' *
+grep -n 'wood' *
+```
+
+Também pode ser usada a opção `-n` para mostrar o número da linha em que a ocorrência aparece no arquivo.
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Find
+====
+
+`find` é outro programa poderoso, ele pode encontrar arquivos no sistema. A busca pode ser feita levando em consideração várias características, como nome do arquivo `-name`, tamanho do arquivo `-size`, tempo de modificação `-ctime`, permissão de acesso `-perm` entre outros.
+
+Ele também pode operar em cima dos arquivos encontrados. é possível removê-los `-delete`, listá-los `-print`, ou executar outro comando `-exec`
+
+Exercício
+---------
+
+Listar nomes de funções javascript  usando `find -exec` com `grep`
+
+--
+
+Agora use `grep` com a opção `-B1` para incluir a linha anterior ao match
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Cut
+===
+
+`cut` é um programa que consegue separar o input em colunas separadas por um separador.
+
+É possível selecionar o delimitador com o argumento `-d` e selecionar colunas com `-f`
+
+Exemplo: Selecionar o nome de todas as pessoas que devem alguma coisa
+
+```sh
+cat bills.csv | cut -d',' -f1
+```
+
+--
+
+Outro Exemplo: Seleciona o nome de todas as pessoas envolvidas em transações
+
+```sh
+cat <(cat bills.csv | cut -d',' -f1 | tail -n +2) <(cat bills.csv | cut -d',' -f3 | tail -n +2)
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Sort
+====
+
+`sort` é um programa simples que ordena o input
+
+Uniq
+====
+
+`uniq` é outro programa simples que remove linhas repetidas seguidas
 
 
 

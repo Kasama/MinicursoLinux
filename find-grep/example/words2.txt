@@ -1,0 +1,10 @@
+board
+line
+taxi
+wood
+glass
+food
+lamp
+club
+yellow
+letter
