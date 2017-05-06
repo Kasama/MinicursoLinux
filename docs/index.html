@@ -925,6 +925,78 @@ Uniq
 
 `uniq` é outro programa simples que remove linhas repetidas seguidas
 
+Tee
+===
+
+O comando `tee` recebe um input e replica-o na saída padrão e num arquivo ao mesmo tempo
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Sed
+===
+
+O comando `sed` é bastante complexo. Seu propósito é ser um editor de texto em stream.
+
+Para isso, o `sed` conta com uma série de comandos.
+
+- `p` print
+
+O comando print imprime na saída, a linha que corresponde ao match.
+
+```sh
+cat compras.txt | sed -n '/ovo/ p'
+cat compras.txt | sed -n '1,5 p'
+cat compras.txt | sed -n '1,3 p;2,6 p'
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Sed
+===
+
+- `i` Insert e `a` Append
+
+Os comandos Insert e Append adicionam texto antes ou depois da linha combinada, respectivamente.
+
+```sh
+cat compras.txt | sed '/batata/ i Comprar dois'
+cat compras.txt | sed '$ a Avisar se lembrar de mais alguma coisa'
+```
+
+- `d` Delete
+
+O comando Delete remove as linhas combinadas do input.
+
+```sh
+cat compras.txt | sed '/ovo/ d'
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Sed
+===
+
+- `s` Substitute
+
+O comando Substitute troca o texto combinado pelo seu substituto
+
+```sh
+cat livros.txt | sed 's/ - /|/'
+```
+
+
 
 
 
