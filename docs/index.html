@@ -866,6 +866,34 @@ background-position: center;
 background-repeat: no-repeat;
 backgorund-size: contain;
 
+Grep
+----
+
+Exercício
+---------
+
+Imprima todos os endereços de e-mail do arquivo `data.txt`
+
+--
+
+```sh
+grep '.\+@.\+\(\..\+\)\+' data.txt
+```
+
+`.\+` - qualquer carácter uma ou mais vezes
+
+`@` - um @
+
+`.\+` - qualquer carácter uma ou mais vezes
+
+`\(\..\+\)\+` - grupo de '.' seguido de caracteres uma ou mais vezes
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
 Find
 ====
 
@@ -996,13 +1024,87 @@ O comando Substitute troca o texto combinado pelo seu substituto
 cat livros.txt | sed 's/ - /|/'
 ```
 
+- `c` Change
+
+O comando Change troca o texto da linha combinada pelo texto dado
+
+```sh
+cat compras.txt | sed '/presunto/ c 10) apresuntado'
+```
+
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Sed
+===
+
+- `w` Write
+
+O comando Write escreve a saída do sed para o arquivo especificado, ao invés da saída padrão
 
 
+```sh
+cat compras.txt | sed -n -e '/batata/ w batata.txt' -e '/ovo/ w ovo.txt' -e '1~2 w impar.txt'
+```
 
+Exercício
+---------
 
+Usando `seq 1 99` para gerar números, imprima todos os múltiplos de 3 que não são múltiplos de 4
 
+--
 
+```sh
+seq 1 99 | sed -n -e '0~4 d' -e '0~3 p'
+```
 
+---
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Sed
+===
+
+Exercício
+---------
+
+Remover linhas com `<article>` ou `</article>`.
+
+Substituir `<title>` com `Title:` e `</title>` com nada.
+
+Substituir `<emphasis>` e `</emphasis>` com asteriscos `*`.
+
+Substituir a palavra `web` por `Web`.
+
+Substituir linhas começando com `<listing>` com `---begin listing`
+
+Substituir linhas começando com `</listing>` com `---end listing`
+
+???
+
+```sh
+-e '/</\?article>/ d'
+-e 's/<title>/Title: /;s/<\/title>//'
+-e 's/<\/\?emphasis>/\*/'
+-e 's/web/Web/g'
+-e 's/^<listing>/---begin listing/'
+-e 's/^<\/listing>/---end listing/'
+```
+
+---
+class: center, middle
+background-image: url(background.png)
+background-position: center;
+background-repeat: no-repeat;
+backgorund-size: contain;
+
+Perguntas, Revisão e Aprofundamento
+===================================
 
 			</textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
